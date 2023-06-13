@@ -7,13 +7,11 @@
 const hre = require("hardhat");
 
 async function main() {
-  const NAME = 'Dapp University'
-  const SYMBOL = 'DAPP'
-  const MAX_SUPPLY = '1000000'
 
   // Deploy Token
   const Token = await hre.ethers.getContractFactory('Token')
-  let token = await Token.deploy(NAME, SYMBOL, MAX_SUPPLY)
+
+  let token1 = await Token.deploy('DappU', 'DAPP', 1000000)
 
   await token.deployed()
   console.log(`Token deployed to: ${token.address}\n`)
