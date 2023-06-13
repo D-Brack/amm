@@ -12,9 +12,17 @@ async function main() {
   const Token = await hre.ethers.getContractFactory('Token')
 
   let token1 = await Token.deploy('DappU', 'DAPP', 1000000)
+  await token1.deployed()
+  console.log(`DAPP deployed to: ${token1.address}\n`)
 
-  await token.deployed()
-  console.log(`Token deployed to: ${token.address}\n`)
+  let token2 = await Token.deploy('USD Coin', 'USD', 1000000)
+  await token2.deployed()
+  console.log(`USD deployed to: ${token2.address}\n`)
+
+  // Deploy AMM
+  const AMM = await hre.ethers.getContractFactory('AMM')
+  let amm = await AMM.deploy(token1.address, token2.address)
+  console.log(`AMM deployed to: ${amm.address}`)
 }
 
 // We recommend this pattern to be able to use async/await everywhere
