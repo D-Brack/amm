@@ -2,7 +2,7 @@ import { ethers } from 'ethers'
 
 import { setProvider, setNetwork, setAccount } from './reducers/provider'
 import { setContracts, setSymbols, balancesLoaded } from './reducers/tokens'
-import { setContract, sharesLoaded, swapRequest, swapSuccess, swapFail } from './reducers/amm'
+import { setContract, sharesLoaded, depositRequest, depositSuccess, depositFail, swapRequest, swapSuccess, swapFail } from './reducers/amm'
 
 import TOKEN_ABI from '../abis/Token.json'
 import AMM_ABI from '../abis/AMM.json'
@@ -65,6 +65,36 @@ export const loadBalances = async (amm, tokens, account, dispatch) => {
 
   const shares = await amm.shares(account)
   dispatch(sharesLoaded(ethers.utils.formatUnits(shares.toString(), 'ether')))
+}
+
+// Add Liquidity
+
+export const addLiquidity = async (provider, amm, tokens, amounts, dispatch) => {
+  dispatch(depositRequest())
+
+  try {
+
+    const signer = await provider.getSigner()
+
+    let transaction
+
+    console.log('0')
+    transaction = await tokens[0].connect(signer).approve(amm.address, amounts[0])
+    await transaction.wait()
+
+    console.log('1')
+    transaction = await tokens[1].connect(signer).approve(amm.address, amounts[1])
+    await transaction.wait()
+
+    console.log('2')
+    transaction = await amm.connect(signer).addLiquidity(amounts[0], amounts[1])
+    await transaction.wait()
+
+    dispatch(depositSuccess(transaction.hash))
+
+  } catch (error) {
+    dispatch(depositFail())
+  }
 }
 
 // Swap

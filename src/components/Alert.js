@@ -1,7 +1,7 @@
 import { Alert as BootstrapAlert } from 'react-bootstrap'
 const Alert = ( { message, transactionHash, variant, setShowAlert}) => {
   return (
-    <BootstrapAlert variant={variant} onClose={() => setShowAlert(false)} dismissable className='alert' >
+    <BootstrapAlert variant={variant} onClose={() => setShowAlert(false)} dismissible className='alert' >
       <BootstrapAlert.Heading>{message}</BootstrapAlert.Heading>
       <hr />
       {transactionHash && (
