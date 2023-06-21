@@ -32,7 +32,7 @@ const Deposit = () => {
   const transactionHash = useSelector(state => state.amm.depositing.transactionHash)
 
   const amountHandler = async (e) => {
-    console.log('amount handler')
+
     if (e.target.id === 'token1') {
       setToken1Amount(e.target.value)
 
@@ -67,6 +67,9 @@ const Deposit = () => {
     await loadBalances(amm, tokens, account, dispatch)
 
     setShowAlert(true)
+
+    setToken1Amount(0)
+    setToken2Amount(0)
   }
 
   return (

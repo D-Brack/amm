@@ -34,6 +34,7 @@ const Swap = () => {
   const balances = useSelector(state => state.tokens.balances)
 
   const dispatch = useDispatch()
+
   const inputHandler = async (e) => {
     if(!inputToken || !outputToken) {
       window.alert('Please select token')
@@ -97,6 +98,9 @@ const Swap = () => {
     await getPrice()
 
     setShowAlert(true)
+
+    setInputAmount(0)
+    setOutputAmount(0)
   }
 
   useEffect(() => {
@@ -116,7 +120,7 @@ const Swap = () => {
                 <Form.Text muted>Balance: {inputToken === symbols[0] ? balances[0] : inputToken === symbols[1] ? balances[1].toString() : '0'}</Form.Text>
               </div>
               <InputGroup>
-                <Form.Control type='number' placeholder='0.0' min='0' step='any' disabled={!inputToken} onChange={(e) => inputHandler(e)}></Form.Control>
+                <Form.Control type='number' placeholder='0.0' min='0' step='any' disabled={!inputToken} value={inputAmount} onChange={(e) => inputHandler(e)}></Form.Control>
                 <DropdownButton variant='outline-secondary' title={inputToken ? inputToken : 'Select Token'} >
                   <Dropdown.Item onClick={(e) => setInputToken(e.target.innerHTML)}>DAPP</Dropdown.Item>
                   <Dropdown.Item onClick={(e) => setInputToken(e.target.innerHTML)}>USD</Dropdown.Item>
@@ -130,7 +134,7 @@ const Swap = () => {
                 <Form.Text muted>Balance: {outputToken  === symbols[0] ? balances[0] : outputToken === symbols[1] ? balances[1].toString() : '0'}</Form.Text>
               </div>
               <InputGroup>
-                <Form.Control type='number' placeholder='0.0' value={outputAmount === 0 ? '0.0' : outputAmount} disabled ></Form.Control>
+                <Form.Control type='number' placeholder='0.0' value={outputAmount === 0 ? '0' : outputAmount} disabled ></Form.Control>
                 <DropdownButton variant='outline-secondary' title={outputToken ? outputToken : 'Select Token'}>
                   <Dropdown.Item onClick={(e) => setOutputToken(e.target.innerHTML)}>DAPP</Dropdown.Item>
                   <Dropdown.Item onClick={(e) => setOutputToken(e.target.innerHTML)}>USD</Dropdown.Item>
