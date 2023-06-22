@@ -80,16 +80,36 @@ const Deposit = () => {
             <Row>
               <Form.Text className='text-end my-2' muted>Balance: {balances[0]}</Form.Text>
               <InputGroup>
-                <Form.Control id='token1' type='number' placeholder='0.0' min='0' step='any' onChange={(e) => amountHandler(e)} value={token1Amount === 0 ? '' : token1Amount}></Form.Control>
-                <InputGroup.Text style={{ width: '100px' }} className='justify-content-center'>{symbols && symbols[0]}</InputGroup.Text>
+                <Form.Control
+                  id='token1'
+                  type='number'
+                  placeholder='0.0'
+                  min='0'
+                  step='any'
+                  onChange={(e) => amountHandler(e)}
+                  value={token1Amount === 0 ? '' : token1Amount}
+                />
+                <InputGroup.Text style={{ width: '100px' }} className='justify-content-center'>
+                  {symbols && symbols[0]}
+                </InputGroup.Text>
               </InputGroup>
             </Row>
 
             <Row className='my-3'>
               <Form.Text className='text-end my-2' muted>Balance: {balances[1]}</Form.Text>
               <InputGroup>
-                <Form.Control id='token2' type='number' placeholder='0.0' min='0' step='any' onChange={(e) => amountHandler(e)} value={token2Amount === 0 ? '' : token2Amount}></Form.Control>
-                <InputGroup.Text style={{ width: '100px' }} className='justify-content-center'>{symbols && symbols[1]}</InputGroup.Text>
+                <Form.Control
+                  id='token2'
+                  type='number'
+                  placeholder='0.0'
+                  min='0'
+                  step='any'
+                  onChange={(e) => amountHandler(e)}
+                  value={token2Amount === 0 ? '' : token2Amount}
+                />
+                <InputGroup.Text style={{ width: '100px' }} className='justify-content-center'>
+                  {symbols && symbols[1]}
+                </InputGroup.Text>
               </InputGroup>
             </Row>
 
@@ -102,16 +122,36 @@ const Deposit = () => {
             </Row>
           </Form>
         ) : (
-          <p className='d-flex justify-content-center align-items-center' style={{ height: '300px' }}>Please connect wallet.</p>
+          <p
+            className='d-flex justify-content-center align-items-center'
+            style={{ height: '300px' }}
+          >
+            Please connect wallet.
+          </p>
         )}
       </Card>
 
         {isDepositing ? (
-          <Alert message={'Deposit Pending...'} transactionHash={null} variant={'info'} setShowAlert={setShowAlert} />
+          <Alert
+            message={'Deposit Pending...'}
+            transactionHash={null}
+            variant={'info'}
+            setShowAlert={setShowAlert}
+          />
         ) : isSuccess && showAlert ? (
-          <Alert message={'Deposit Successful'} transactionHash={transactionHash} variant={'success'} setShowAlert={setShowAlert} />
+          <Alert
+            message={'Deposit Successful'}
+            transactionHash={transactionHash}
+            variant={'success'}
+            setShowAlert={setShowAlert}
+          />
         ) : !isSuccess && showAlert ? (
-          <Alert message={'Deposit Failed'} transactionHash={null} variant={'danger'} setShowAlert={setShowAlert} />
+          <Alert
+            message={'Deposit Failed'}
+            transactionHash={null}
+            variant={'danger'}
+            setShowAlert={setShowAlert}
+          />
         ) : (
           <></>
         )}

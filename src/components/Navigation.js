@@ -54,7 +54,15 @@ const Navigation = () => {
           {account ? (
             <Navbar.Text className='d-flex align-items-center'>
               {`${account.slice(0, 5)}...${account.slice(-4)}`}
-              <Blockies seed={account} size={10} scale={3} color='#2187D0' bgColor='#F1F2F9' spotColor='#767F92' className='identicon mx-2' />
+              <Blockies
+                seed={account}
+                size={10}
+                scale={3}
+                color='#2187D0'
+                bgColor='#F1F2F9'
+                spotColor='#767F92'
+                className='identicon mx-2'
+              />
             </Navbar.Text>
           ) : (
             <Button onClick={connectHandler}>Connect</Button>

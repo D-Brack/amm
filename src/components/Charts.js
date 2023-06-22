@@ -32,7 +32,13 @@ const Charts = () => {
     <div>
       {provider && amm ? (
         <div>
-          <Chart options={options} series={chart ? chart.series : series} type='line' width='100%' height='100%' />
+          <Chart
+            options={options}
+            series={chart ? chart.series : series}
+            type='line'
+            width='100%'
+            height='100%'
+          />
 
           <hr />
 
@@ -57,7 +63,19 @@ const Charts = () => {
                   <td>{swap.args.tokenGet === tokens[0].address ? symbols[0] : symbols[1]}</td>
                   <td>{ethers.utils.formatUnits(swap.args.tokenGetAmount.toString(), 'ether')}</td>
                   <td>{swap.args.user.slice(0, 5) + '...' + swap.args.user.slice(-4)}</td>
-                  <td>{new Date(swap.args.timestamp * 1000).toLocaleDateString(undefined, {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'})}</td>
+                  <td>{new Date(swap.args.timestamp * 1000)
+                    .toLocaleDateString(
+                      undefined,
+                      {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        second: 'numeric'
+                      }
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

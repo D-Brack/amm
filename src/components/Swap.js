@@ -117,13 +117,36 @@ const Swap = () => {
             <Row className='my-3'>
               <div className='d-flex justify-content-between'>
                 <Form.Label><strong>Input:</strong></Form.Label>
-                <Form.Text muted>Balance: {inputToken === symbols[0] ? balances[0] : inputToken === symbols[1] ? balances[1].toString() : '0'}</Form.Text>
+                <Form.Text muted>
+                  Balance: {
+                    inputToken === symbols[0] ? (
+                      balances[0]
+                    ) : inputToken === symbols[1] ? (
+                      balances[1]
+                    ) : '0'
+                  }
+                </Form.Text>
               </div>
               <InputGroup>
-                <Form.Control type='number' placeholder='0.0' min='0' step='any' disabled={!inputToken} value={inputAmount} onChange={(e) => inputHandler(e)}></Form.Control>
-                <DropdownButton variant='outline-secondary' title={inputToken ? inputToken : 'Select Token'} >
-                  <Dropdown.Item onClick={(e) => setInputToken(e.target.innerHTML)}>DAPP</Dropdown.Item>
-                  <Dropdown.Item onClick={(e) => setInputToken(e.target.innerHTML)}>USD</Dropdown.Item>
+                <Form.Control
+                  type='number'
+                  placeholder='0.0'
+                  min='0'
+                  step='any'
+                  disabled={!inputToken}
+                  value={inputAmount}
+                  onChange={(e) => inputHandler(e)}
+                />
+                <DropdownButton
+                  variant='outline-secondary'
+                  title={inputToken ? inputToken : 'Select Token'}
+                >
+                  <Dropdown.Item onClick={(e) => setInputToken(e.target.innerHTML)}>
+                    DAPP
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={(e) => setInputToken(e.target.innerHTML)}>
+                    USD
+                  </Dropdown.Item>
                 </DropdownButton>
               </InputGroup>
             </Row>
@@ -131,13 +154,33 @@ const Swap = () => {
             <Row className='my-4'>
               <div className='d-flex justify-content-between'>
                 <Form.Label><strong>Output:</strong></Form.Label>
-                <Form.Text muted>Balance: {outputToken  === symbols[0] ? balances[0] : outputToken === symbols[1] ? balances[1].toString() : '0'}</Form.Text>
+                <Form.Text muted>
+                  Balance: {
+                    outputToken  === symbols[0] ? (
+                      balances[0]
+                      ) : outputToken === symbols[1] ? (
+                        balances[1]
+                      ) : '0'
+                    }
+                  </Form.Text>
               </div>
               <InputGroup>
-                <Form.Control type='number' placeholder='0.0' value={outputAmount === 0 ? '0' : outputAmount} disabled ></Form.Control>
-                <DropdownButton variant='outline-secondary' title={outputToken ? outputToken : 'Select Token'}>
-                  <Dropdown.Item onClick={(e) => setOutputToken(e.target.innerHTML)}>DAPP</Dropdown.Item>
-                  <Dropdown.Item onClick={(e) => setOutputToken(e.target.innerHTML)}>USD</Dropdown.Item>
+                <Form.Control
+                  type='number'
+                  placeholder='0.0'
+                  value={outputAmount === 0 ? '0' : outputAmount}
+                  disabled
+                />
+                <DropdownButton
+                  variant='outline-secondary'
+                  title={outputToken ? outputToken : 'Select Token'}
+                >
+                  <Dropdown.Item onClick={(e) => setOutputToken(e.target.innerHTML)}>
+                    DAPP
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={(e) => setOutputToken(e.target.innerHTML)}>
+                    USD
+                  </Dropdown.Item>
                 </DropdownButton>
               </InputGroup>
             </Row>
@@ -152,16 +195,36 @@ const Swap = () => {
             </Row>
           </Form>
         ) : (
-          <p className='d-flex justify-content-center align-items-center' style={{ height: '300px' }}>Please connect wallet.</p>
+          <p
+            className='d-flex justify-content-center align-items-center'
+            style={{ height: '300px' }}
+          >
+            Please connect wallet.
+          </p>
         )}
       </Card>
 
       {isSwapping ? (
-        <Alert message={'Swap Pending...'} transactionHash={null} variant={'info'} setShowAlert={setShowAlert} />
+        <Alert
+          message={'Swap Pending...'}
+          transactionHash={null}
+          variant={'info'}
+          setShowAlert={setShowAlert}
+        />
       ) : isSuccess && showAlert ? (
-        <Alert message={'Swap Successful'} transactionHash={transactionHash} variant={'success'} setShowAlert={setShowAlert} />
+        <Alert
+          message={'Swap Successful'}
+          transactionHash={transactionHash}
+          variant={'success'}
+          setShowAlert={setShowAlert}
+        />
       ) : !isSuccess && showAlert ? (
-        <Alert message={'Swap Failed'} transactionHash={null} variant={'danger'} setShowAlert={setShowAlert} />
+        <Alert
+          message={'Swap Failed'}
+          transactionHash={null}
+          variant={'danger'}
+          setShowAlert={setShowAlert}
+        />
       ) : (
         <></>
       )}

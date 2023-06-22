@@ -8,7 +8,6 @@ const hre = require("hardhat");
 
 async function main() {
 
-  // Deploy Token
   const Token = await hre.ethers.getContractFactory('Token')
 
   let token1 = await Token.deploy('DappU', 'DAPP', 1000000)
@@ -19,7 +18,6 @@ async function main() {
   await token2.deployed()
   console.log(`USD deployed to: ${token2.address}\n`)
 
-  // Deploy AMM
   const AMM = await hre.ethers.getContractFactory('AMM')
   let amm = await AMM.deploy(token1.address, token2.address)
   console.log(`AMM deployed to: ${amm.address}`)

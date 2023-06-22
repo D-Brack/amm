@@ -19,7 +19,6 @@ async function main() {
 
   console.log('Fetching accounts and network...\n')
 
-  // Fetch accounts
   const accounts = await hre.ethers.getSigners()
   const deployer = accounts[0]
   const investor1 = accounts[1]
@@ -27,16 +26,13 @@ async function main() {
   const investor3 = accounts[3]
   const investor4 = accounts[4]
 
-  // Fetch network
   const { chainId } = await hre.ethers.provider.getNetwork()
 
   console.log('Transfer tokens to investors...\n')
 
-  // Fetch token contracts
   const dapp = await hre.ethers.getContractAt('Token', config[chainId].dapp.address)
   const usd = await hre.ethers.getContractAt('Token', config[chainId].usd.address)
 
-  // Transfer tokens to investors
   let transaction = await dapp.connect(deployer).transfer(investor1.address, tokens(10))
   await transaction.wait()
 
@@ -51,24 +47,20 @@ async function main() {
 
   console.log('Add liquidity...\n')
 
-  // Fetch AMM contract
   const amm = await hre.ethers.getContractAt('AMM', config[chainId].amm.address)
   const amount = tokens(100)
 
-  // Approve tokens to be added to LP
   transaction = await dapp.connect(deployer).approve(amm.address, amount)
   await transaction.wait()
 
   transaction = await usd.connect(deployer).approve(amm.address, amount)
   await transaction.wait()
 
-  // Add tokens to LP
   transaction = await amm.connect(deployer).addLiquidity(amount, amount)
   await transaction.wait()
 
   console.log('Swap tokens...\n')
 
-  // Approve tokens for amm to swap
   transaction = await dapp.connect(investor1).approve(amm.address, tokens(1))
   await transaction.wait()
 
@@ -81,7 +73,6 @@ async function main() {
   transaction = await usd.connect(investor4).approve(amm.address, tokens(5))
   await transaction.wait()
 
-  //Swap tokens
   transaction = await amm.connect(investor1).swapToken1(tokens(1))
   await transaction.wait()
 

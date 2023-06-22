@@ -53,8 +53,18 @@ const Withdraw = () => {
             <Row>
               <Form.Text className='text-end my-2' muted>Shares: {shares}</Form.Text>
               <InputGroup>
-                <Form.Control id='shares' type='number' placeholder='0' min='0' step='any' value={amount} onChange={(e) => setAmount(e.target.value)} ></Form.Control>
-                <InputGroup.Text style={{ width: '100px' }} className='justify-content-center'>Shares</InputGroup.Text>
+                <Form.Control
+                  id='shares'
+                  type='number'
+                  placeholder='0'
+                  min='0'
+                  step='any'
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+                <InputGroup.Text style={{ width: '100px' }} className='justify-content-center'>
+                  Shares
+                </InputGroup.Text>
               </InputGroup>
             </Row>
 
@@ -74,16 +84,36 @@ const Withdraw = () => {
             </Row>
           </Form>
         ) : (
-          <p className='d-flex justify-content-center align-items-center' style={{ height: '300px' }}>Please connect wallet.</p>
+          <p
+            className='d-flex justify-content-center align-items-center'
+            style={{ height: '300px' }}
+          >
+            Please connect wallet.
+          </p>
         )}
       </Card>
 
         {isWithdrawing ? (
-          <Alert message={'Withdraw Pending...'} transactionHash={null} variant={'info'} setShowAlert={setShowAlert} />
+          <Alert
+            message={'Withdraw Pending...'}
+            transactionHash={null}
+            variant={'info'}
+            setShowAlert={setShowAlert}
+          />
         ) : isSuccess && showAlert ? (
-          <Alert message={'Withdraw Successful'} transactionHash={transactionHash} variant={'success'} setShowAlert={setShowAlert} />
+          <Alert
+            message={'Withdraw Successful'}
+            transactionHash={transactionHash}
+            variant={'success'}
+            setShowAlert={setShowAlert}
+          />
         ) : !isSuccess && showAlert ? (
-          <Alert message={'Withdraw Failed'} transactionHash={null} variant={'danger'} setShowAlert={setShowAlert} />
+          <Alert
+            message={'Withdraw Failed'}
+            transactionHash={null}
+            variant={'danger'}
+            setShowAlert={setShowAlert}
+          />
         ) : (
           <></>
         )}
